@@ -54,7 +54,9 @@ def banner_parser():
         soup = BeautifulSoup(item.summary, "lxml")
         img = soup.find("img")["src"]
         list.append(dict(name=item.title, link=item.link, image=img))
-    raw_string = dict(success=True, msg='', news_list=list)
+    raw_news_list = rss_parser(part="1")
+    news_list = raw_news_list["news_list"]
+    raw_string = dict(success=True, msg='', banner_list=list, news_list=news_list)
     return raw_string
 
 

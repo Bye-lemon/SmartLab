@@ -11,7 +11,7 @@ BANNERRSS = "http://www.lieyunwang.com/newrss/feed.xml"
 def rss_parser(part):
     rss = feedparser.parse(RSSURL)
     part = int(part)
-    doc = rss.entries[(part-1)*5: part*5]
+    doc = rss.entries[(part-1)*8: part*8]
     if len(doc) == 0:
         return dict(success=False, msg="EOF")
     list = []

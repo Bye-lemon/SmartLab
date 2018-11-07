@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  api:
+    #restart: always
+    stdin_open: true
+    tty: true
+    build: ./Dockerfile
+    image: smartlab:latest
+    volumes:
+      - ./app:/deploy/app
+      - ./run.py:/deploy/run.py
+      - ./nginx_flask.conf:/etc/nginx/sites-available/nginx_flask.conf
+      - ./gunicorn.conf:/etc/supervisor/conf.d/gunicorn.conf
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    ports:
+      - "80:80"
+    #command: '/bin/bash'
+    command: '/usr/bin/supervisord'

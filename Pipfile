@@ -1,0 +1,22 @@
+[[source]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+feedparser = "*"
+"beautifulsoup4" = "*"
+requests = "*"
+lxml = "*"
+markdown = "*"
+flask-wtf = "*"
+flask-admin = "*"
+bootstrap-flask = "*"
+flask-sqlalchemy = "*"
+flask-login = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

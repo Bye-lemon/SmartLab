@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% from "dev/macros.html" import bs_field %}
+
+{% block metas %}
+    {{ super() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <a href="{{ url_for('dev.dev_hello') }}">&larr; Return</a>
+        <h1 class="display-4">Smartlab安装包上传</h1>
+        <hr>
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <form method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ bs_field(form.apk) }}
+            {{ bs_field(form.version) }}
+            {{ bs_field(form.date_version) }}
+            {{ form.submit(class='btn btn-primary') }}
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

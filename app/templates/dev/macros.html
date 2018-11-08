@@ -1,0 +1,15 @@
+{% macro bs_field(field) %}
+<div class="form-group">
+    {{ field.label }}<br>
+    {% if field.errors -%}
+        {{ field(class='form-control is-invaild') }}
+        {% for error in field.errors -%}
+            <div class="invalid-feedback">
+                {{ error }}
+            </div>
+        {%- endfor %}
+    {% else %}
+        {{ field(class='form-control') }}
+    {%- endif %}
+</div>
+{% endmacro %}

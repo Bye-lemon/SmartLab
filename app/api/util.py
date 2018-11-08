@@ -13,19 +13,16 @@ def rss_parser(part):
     part = int(part)
     doc = rss.entries[(part-1)*8: part*8]
     if len(doc) == 0:
-        return dict(success=False, msg="EOF")
+        return dict(success=False, msg="没有更多的文章了，再回顾一下前面的吧~")
     list = []
     headers = {
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"}
     for item in doc:
         r = requests.get(item.link, headers=headers)
         div = BeautifulSoup(r.text, "lxml").find(class_="gray fl")
-        key = ''
-        string = []
-        for a in div.find_all("a"):
-            key = key + a.string.replace('\u0026', ',') + ','
-        for str in div.strings:
-            string.append(str)
+        keys = [a.string.replace('\u0026', ',') for a in div.find_all("a")]
+        key = ','.join(keys)
+        string = [str for str in div.strings]
         raw_date = string[-1].replace('\n', '').strip()
         date = raw_date[0:4] + '-' + raw_date[5:7] + '-' + raw_date[-3:-1]
         list.append(dict(name=item.title, link=item.link, keys=key, date=date))
@@ -33,10 +30,10 @@ def rss_parser(part):
     return raw_string
 
 
-def linked_parser():
+def linked_parser(url):
     headers = {
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"}
-    r = requests.get(BANNERRSS, headers=headers)
+    r = requests.get(url, headers=headers)
     html = r.text
     soup = BeautifulSoup(html, "lxml")
     raw_md = soup.find(id="js_detail")["value"]

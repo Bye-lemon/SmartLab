@@ -15,6 +15,7 @@ flask-admin = "*"
 bootstrap-flask = "*"
 flask-sqlalchemy = "*"
 flask-login = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

@@ -2,7 +2,8 @@
 ---
 [![Build Status](https://travis-ci.org/Bye-lemon/SmartLab.svg?branch=master)](https://travis-ci.org/Bye-lemon/SmartLab)
 [![codebeat badge](https://codebeat.co/badges/ccfe67ae-b831-411c-9779-bb2cee86d557)](https://codebeat.co/projects/github-com-bye-lemon-smartlab-master)
-![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)
+[![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/byelemon/smartlab/)
+
 
 
 This repository contains files necessary for building a Docker image of Nginx + Gunicorn + Flask.

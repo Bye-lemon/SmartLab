@@ -33,17 +33,19 @@ def get_news_content():
 
 @blueprint.route("/v1.0/banner", methods=["GET"])
 def get_banner_content():
-    url=request.values.get("url")
+    url = request.values.get("url")
     response = lieyun_parser(url)
     return jsonify(response)
 
 
 @blueprint.route("/v1.0/version", methods=["GET"])
 def get_aversion_newest():
-    file = open(os.path.join(os.path.join(current_app.root_path, 'static/package'), "newest.txt"), "r")
+    file = open(os.path.join(os.path.join(current_app.root_path, 'static/package'), "newest.txt"), "r", encoding="utf8")
     newest = ["SmartLab"]
-    for str in file.readline().split(' '):
+    for str in file.readline().replace('\n', '').split(' '):
         newest.append(str)
     apk_name = '_'.join(newest) + '.apk'
+    apk_desc = file.readline()
     apk_path = "http://140.143.186.223/static/package/" + apk_name
-    return jsonify(dict(success=True, msg='', version=newest[1], date_version=newest[2], link=apk_path))
+    return jsonify(
+        dict(success=True, msg='', version_name=newest[1], version_code=int(newest[2]), desc=apk_desc, link=apk_path))

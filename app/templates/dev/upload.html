@@ -26,8 +26,9 @@
         <form method="post" enctype="multipart/form-data">
             {{ form.csrf_token }}
             {{ bs_field(form.apk) }}
-            {{ bs_field(form.version) }}
-            {{ bs_field(form.date_version) }}
+            {{ bs_field(form.version_name) }}
+            {{ bs_field(form.version_code) }}
+            {{ bs_field(form.description) }}
             {{ form.submit(class='btn btn-primary') }}
         </form>
     </div>

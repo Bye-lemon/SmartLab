@@ -6,7 +6,7 @@ services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=3.3
+  - DOCKER_COMPOSE_VERSION=1.16.1
 
 before_install:
   - docker build -t smartlab:latest .
@@ -14,6 +14,9 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+
+script:
+  - docker-compose up
 
 addons:
   apt:

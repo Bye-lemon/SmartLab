@@ -16,6 +16,7 @@ bootstrap-flask = "*"
 flask-sqlalchemy = "*"
 flask-login = "*"
 python-dotenv = "*"
+sentry-sdk = {version = "==0.5.3", extras = ["flask"]}
 
 [dev-packages]
 

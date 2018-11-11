@@ -53,3 +53,19 @@ def get_aversion_newest():
     return jsonify(
         dict(success=True, msg='', version_name=newest[1], version_code=int(newest[2]), size=apk_size, desc=apk_desc,
              link=apk_path))
+
+
+@blueprint.route("/v1.0/resource/<dir>", methods=["GET"])
+def get_root_resource(dir=''):
+    dir_path = os.path.join(current_app.root_path, 'static/resource/' + dir)
+    file_list = []
+    dir_list = []
+    root, files, dirs = os.walk(dir_path)
+    for file in files:
+        file_byte = os.path.getsize(os.path.join(dir_path, file))
+        file_size = str(round((float(file_byte) / (1024 * 1024)), 2)) + ' MB'
+        file_list.append(dict(name=file, size=file_size, link="http://140.143.186.223/static/resource" + dir + '/' + file))
+    for dir in dirs:
+        dir_list.append(dict(name=dir))
+    return jsonify(dict(success=True, msg='', file_list=file_list, dir_list=dir))
+

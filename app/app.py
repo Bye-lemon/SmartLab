@@ -1,3 +1,6 @@
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
 from flask import Flask
 
 from .api import views as apiview
@@ -7,6 +10,10 @@ from .extensions import bootstrap
 
 
 def create_app(config_name):
+    sentry_sdk.init(
+        dsn="https://5753772e9dc4470ba3881a0ea5426099@sentry.io/1318918",
+        integrations=[FlaskIntegration()]
+    )
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     app.secret_key='Simple'

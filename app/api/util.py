@@ -1,8 +1,10 @@
 import feedparser
 import markdown
+import os
 import requests
 
 from bs4 import BeautifulSoup
+from flask import current_app
 
 RSSURL = "https://rsshub.app/linkedkeeper/index"
 BANNERRSS = "http://www.lieyunwang.com/newrss/feed.xml"
@@ -63,3 +65,15 @@ def lieyun_parser(url):
         if item.link == url:
             return dict(success=True, msg='', html=item.summary)
     return dict(success=False, msg="Not Found")
+
+
+def dir_path_parser():
+    path = os.path.join(current_app.root_path, 'static/resource')
+    file_list = []
+    files = os.listdir(path)
+    for file in files:
+        file_byte = os.path.getsize(os.path.join(path, file))
+        file_size = str(round((float(file_byte) / (1024 * 1024)), 2)) + ' MB'
+        file_list.append(
+            dict(name=file, size=file_size, link="http://140.143.186.223/static/resource/" + file))
+    return dict(success=True, msg='', file_list=file_list)

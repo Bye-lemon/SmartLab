@@ -6,18 +6,15 @@ LABEL author="Li Yingping"
 
 RUN apt-get update
 RUN apt-get install -y nginx supervisor
-RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ gunicorn
-RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ setuptools
-RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ pipenv
+RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ gunicorn setuptools
 
 ENV PYTHONIOENCODING=utf-8
 
 # Build folder
 RUN mkdir -p /deploy/app
 WORKDIR /deploy/app
-COPY /Pipfile /deploy/app/Pipfile
-RUN pipenv lock
-RUN pipenv install --deploy --system
+COPY /requirements.txt /deploy/app/requirements.txt
+RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 
 # Setup nginx
 RUN rm /etc/nginx/sites-enabled/default

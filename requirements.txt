@@ -1,0 +1,16 @@
+beautifulsoup4==4.8.0
+Bootstrap-Flask==1.0.10
+feedparser==5.2.1
+Flask==1.1.1
+Flask-Admin==1.5.3
+Flask-BabelEx==0.9.3
+Flask-Login==0.4.1
+Flask-SQLAlchemy==2.4.0
+Flask-WTF==0.14.2
+Markdown==3.1.1
+PyMySQL==0.9.3
+python-dotenv==0.10.3
+requests==2.22.0
+requests-html==0.10.0
+sentry-sdk[flask]==0.10.2
+WTForms==2.2.1

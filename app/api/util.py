@@ -1,44 +1,46 @@
+# coding=utf-8
+import datetime
 import feedparser
 import markdown
 import os
 import requests
-
 from bs4 import BeautifulSoup
 from flask import current_app
+from requests_html import HTMLSession
 
-RSSURL = "https://rsshub.app/linkedkeeper/index"
+RSSURL = "http://www.linkedkeeper.com/home/index.action"
 BANNERRSS = "http://www.lieyunwang.com/newrss/feed.xml"
+HEADERS = {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"}
 
 
 def rss_parser(part):
-    rss = feedparser.parse(RSSURL)
     part = int(part)
-    doc = rss.entries[(part-1)*8: part*8]
-    if len(doc) == 0:
-        return dict(success=False, msg="没有更多的文章了，再回顾一下前面的吧~")
+    session = HTMLSession()
+    r = session.get(RSSURL, headers=HEADERS)
     list = []
-    headers = {
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"}
-    for item in doc:
-        r = requests.get(item.link, headers=headers)
-        div = BeautifulSoup(r.text, "lxml").find(class_="gray fl")
-        keys = [a.string.replace('\u0026', ',') for a in div.find_all("a")]
-        key = ','.join(keys)
-        string = [str for str in div.strings]
-        raw_date = string[-1].replace('\n', '').strip()
-        date = raw_date[0:4] + '-' + raw_date[5:7] + '-' + raw_date[-3:-1]
-        list.append(dict(name=item.title, link=item.link, keys=key, date=date))
+    try:
+        tds = r.html.find('td')[(part - 1) * 8: part * 8]
+    except:
+        tds = r.html.find('td')[(part - 1) * 8:]
+    if len(tds) == 0:
+        return dict(success=False, msg="没有更多的文章了，再回顾一下前面的吧~")
+    for td in tds:
+        title = td.find('.blog_weight')
+        link = r"http://www.linkedkeeper.com" + title[0].attrs["href"]
+        date = str(datetime.date.today().year) + '-' + '-'.join(
+            td.find('dd')[2].text.replace('月', ' ').replace('日', '').split())
+        tags = ','.join([tag.text for tag in td.find('a[href*="tag"]')])
+        list.append(
+            dict(name=title[0].text, link=link, keys=tags, date=date))
     raw_string = dict(success=True, msg='', news_list=list)
     return raw_string
 
 
 def linked_parser(url):
-    headers = {
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"}
-    r = requests.get(url, headers=headers)
-    html = r.text
-    soup = BeautifulSoup(html, "lxml")
-    raw_md = soup.find(id="js_detail")["value"]
+    session = HTMLSession()
+    r = session.get(url, headers=headers)
+    raw_md = r.find("#js_detail").attrs["value"]
     md = markdown.markdown(raw_md)
     raw_md = dict(success=True, msg='', html=md)
     return raw_md

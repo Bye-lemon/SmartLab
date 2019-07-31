@@ -1,14 +1,12 @@
 [[source]]
-url = "https://mirrors.aliyun.com/pypi/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 verify_ssl = true
-name = "pypi"
+name = "tsinghua"
 
 [packages]
 flask = "*"
 feedparser = "*"
-"beautifulsoup4" = "*"
-requests = "*"
-lxml = "*"
+requests-html = "*"
 markdown = "*"
 flask-wtf = "*"
 flask-admin = "*"
@@ -16,9 +14,12 @@ bootstrap-flask = "*"
 flask-sqlalchemy = "*"
 flask-login = "*"
 python-dotenv = "*"
-sentry-sdk = {version = "==0.5.3", extras = ["flask"]}
+sentry-sdk = {version = "==0.5.3",extras = ["flask"]}
+mysql-python = "*"
+beautifulsoup4 = "*"
+flask-babelex = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"

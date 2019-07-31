@@ -1,12 +1,14 @@
+# coding=utf-8
 import sentry_sdk
+from flask import Flask
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-from flask import Flask
-
+from .admin.view import admin
 from .api import views as apiview
-from .dev import views as devview
 from .config import config
-from .extensions import bootstrap
+from .dev import views as devview
+from .extensions import bootstrap, login_manager, babel
+from .models import db
 
 
 def create_app(config_name):
@@ -16,8 +18,7 @@ def create_app(config_name):
     )
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-    app.secret_key='Simple'
-    app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024
+    app.secret_key = 'Simple'
     register_blueprints(app)
     register_extensions(app)
     return app
@@ -32,4 +33,8 @@ def register_blueprints(app):
 
 def register_extensions(app):
     bootstrap.init_app(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    admin.init_app(app)
+    babel.init_app(app)
     return None

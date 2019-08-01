@@ -241,3 +241,6 @@ class ActivityDetailView(ModalView):
         activity_id="活动号"
     )
     form = ActivityDetailForm
+    form_widget_args = {
+        "class": ""
+    }

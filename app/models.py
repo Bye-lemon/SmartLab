@@ -1,3 +1,5 @@
+import datetime
+
 from .extensions import db
 
 
@@ -39,8 +41,12 @@ class Tool(db.Model):
     name = db.Column(db.VARCHAR(255))
     is_borrowed = db.Column(db.Integer)
     user_id = db.Column(db.VARCHAR(255))
-    create_time = db.Column(db.DateTime)
-    update_time = db.Column(db.DateTime)
+    create_time = db.Column(db.DateTime, default=datetime.datetime.now)
+    update_time = db.Column(db.DateTime, default=datetime.datetime.now)
+
+    def __init__(self):
+        self.is_borrowed = 0
+
 
 class User(db.Model):
     __tablename__ = "user"

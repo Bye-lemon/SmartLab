@@ -11,8 +11,8 @@ class Activity(db.Model):
     name = db.Column(db.VARCHAR(255))
     rest_number = db.Column(db.Integer)
     max_number = db.Column(db.Integer)
-    create_time = db.Column(db.DateTime)
-    update_time = db.Column(db.DateTime)
+    create_time = db.Column(db.DateTime, default=datetime.datetime.now)
+    update_time = db.Column(db.DateTime, default=datetime.datetime.now)
     teacher = db.Column(db.VARCHAR(255))
 
 

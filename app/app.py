@@ -3,7 +3,7 @@ import sentry_sdk
 from flask import Flask
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-from .admin.view import admin
+from .admin.views import admin
 from .api import views as apiview
 from .config import config
 from .dev import views as devview

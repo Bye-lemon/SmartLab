@@ -14,3 +14,4 @@ requests==2.22.0
 requests-html==0.10.0
 sentry-sdk[flask]==0.10.2
 WTForms==2.2.1
+tablib==0.13.0

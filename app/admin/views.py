@@ -3,8 +3,8 @@ import os.path as op
 from flask_admin.contrib.fileadmin import FileAdmin
 from flask_admin.contrib.sqla import ModelView
 
-from app.admin.modelview import UserView, ModalView, AuditView, ToolView, ManipulationView, GradeView, UserActivityView, \
-    ActivityView, ActivityDetailView
+from app.admin.modelviews import UserView, ModalView, AuditView, ToolView, ManipulationView, GradeView, \
+    UserActivityView, ActivityView, ActivityDetailView
 from app.extensions import admin, db
 from app.models import Activity, ActivityDetail, Manipulation, Tool, User, UserActivity
 

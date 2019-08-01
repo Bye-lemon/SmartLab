@@ -5,14 +5,20 @@
 # @File    : modelview.py
 # @Software: PyCharm
 
+# TODO: Export File Rename (Type + DateTime)
+
+import tablib
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.model import typefmt
+
+from app.admin.forms import ActivityForm, ActivityDetailForm
 
 
 class ModalView(ModelView):
     create_modal = True
     details_modal = True
     edit_modal = True
+    export_types = ['xls']
 
     column_type_formatters = dict(
         typefmt.BASE_FORMATTERS
@@ -215,9 +221,7 @@ class ActivityView(ModalView):
     column_editable_list = (
         'is_abled',
     )
-    form_excluded_columns = (
-        'is_borrowed', 'user_id', 'create_time', 'update_time'
-    )
+    form = ActivityForm
     column_display_pk = True
 
 
@@ -236,3 +240,4 @@ class ActivityDetailView(ModalView):
         location="活动地点",
         activity_id="活动号"
     )
+    form = ActivityDetailForm

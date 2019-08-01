@@ -5,16 +5,9 @@
 # @File    : modelview.py
 # @Software: PyCharm
 
-from flask_admin import BaseView, expose
 from flask_admin.contrib.sqla import ModelView
 
-from app.models import Users
-
-
-class MyView(BaseView):
-    @expose('/')
-    def index(self):
-        return self.render('admin/index.html')
+from app.models import User
 
 
 class ModalView(ModelView):

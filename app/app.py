@@ -18,7 +18,6 @@ def create_app(config_name):
     )
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-    app.secret_key = 'Simple'
     register_blueprints(app)
     register_extensions(app)
     return app

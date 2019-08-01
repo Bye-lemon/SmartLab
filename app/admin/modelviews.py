@@ -11,7 +11,7 @@ import tablib
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.model import typefmt
 
-from app.admin.forms import ActivityForm, ActivityDetailForm
+from .forms import ActivityForm, ActivityDetailForm
 
 
 class ModalView(ModelView):

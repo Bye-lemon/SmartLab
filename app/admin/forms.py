@@ -9,7 +9,7 @@ from flask_admin.form.fields import Select2Field
 from wtforms import IntegerField, StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length
 
-from app.admin.compatibility import SelectMultipleField
+from .compatibility import SelectMultipleField
 
 
 class ActivityForm(BaseForm):

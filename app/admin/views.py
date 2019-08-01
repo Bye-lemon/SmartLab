@@ -3,10 +3,10 @@ import os.path as op
 from flask_admin.contrib.fileadmin import FileAdmin
 from flask_admin.contrib.sqla import ModelView
 
-from app.admin.modelviews import UserView, ModalView, AuditView, ToolView, ManipulationView, GradeView, \
+from .modelviews import UserView, ModalView, AuditView, ToolView, ManipulationView, GradeView, \
     UserActivityView, ActivityView, ActivityDetailView
-from app.extensions import admin, db
-from app.models import Activity, ActivityDetail, Manipulation, Tool, User, UserActivity
+from ..extensions import admin, db
+from ..models import Activity, ActivityDetail, Manipulation, Tool, User, UserActivity
 
 admin.add_view(UserView(User, db.session, category="人员管理", name="注册信息", endpoint="user"))
 admin.add_view(AuditView(User, db.session, category="人员管理", name="审核申请", endpoint="audit"))

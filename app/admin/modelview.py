@@ -80,6 +80,10 @@ class AuditView(ModalView):
     column_editable_list = (
         'role', 'is_allowed', 'is_deleted'
     )
+    column_formatters = dict(
+        is_allowed=lambda _, __, x, ___: "是" if x.is_allowed == 1 else "否",
+        is_deleted=lambda _, __, x, ___: "是" if x.is_deleted == 1 else "否"
+    )
     column_display_pk = True
 
 
@@ -109,6 +113,9 @@ class ToolView(ModalView):
     )
     form_excluded_columns = (
         'is_borrowed', 'user_id', 'create_time', 'update_time'
+    )
+    column_formatters = dict(
+        is_borrowed=lambda _, __, x, ___: "是" if x.is_borrowed == 1 else "否"
     )
     column_display_pk = True
 
@@ -188,23 +195,44 @@ class ActivityView(ModalView):
     can_view_details = True
 
     column_labels = dict(
-        box_id="序号",
+        activity_id="编号",
+        type="类别",
+        is_abled="是否开放",
         name="名称",
-        is_borrowed="是否被借用",
-        user_id="借用人学号",
-        create_time="登记时间",
-        update_time="上次变动时间"
+        rest_number="剩余可选人数",
+        max_number="总容量",
+        create_time="创建时间",
+        update_time="上次变动时间",
+        teacher="教师或主持人",
     )
-    column_descriptions = dict(
-        update_time="被借用的工具的借用时间或者被归还的工具的归还时间。"
+    column_formatters = dict(
+        type=lambda _, __, x, ___: ["课程", "活动"][x.type - 1],
+        is_abled=lambda _, __, x, ___: "是" if x.is_abled == 1 else "否"
     )
     column_filters = (
-        'is_borrowed', 'user_id'
+        'is_abled', 'teacher', 'type'
     )
     column_editable_list = (
-        'name',
+        'is_abled',
     )
     form_excluded_columns = (
         'is_borrowed', 'user_id', 'create_time', 'update_time'
     )
     column_display_pk = True
+
+
+class ActivityDetailView(ModalView):
+    can_create = True
+    can_edit = True
+    can_delete = True
+    can_export = True
+    can_view_details = True
+
+    column_labels = dict(
+        activity_detail_id="编号",
+        week="周次",
+        day="星期",
+        activity_order="节次",
+        location="活动地点",
+        activity_id="活动号"
+    )

@@ -39,8 +39,8 @@ def rss_parser(part):
 
 def linked_parser(url):
     session = HTMLSession()
-    r = session.get(url, headers=headers)
-    raw_md = r.find("#js_detail").attrs["value"]
+    r = session.get(url, headers=HEADERS)
+    raw_md = r.html.find("#js_detail")[0].attrs["value"]
     md = markdown.markdown(raw_md)
     raw_md = dict(success=True, msg='', html=md)
     return raw_md

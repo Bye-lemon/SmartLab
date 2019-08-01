@@ -178,3 +178,33 @@ class GradeView(ModalView):
         'activity_id',
     )
     column_display_pk = True
+
+
+class ActivityView(ModalView):
+    can_create = True
+    can_edit = True
+    can_delete = True
+    can_export = True
+    can_view_details = True
+
+    column_labels = dict(
+        box_id="序号",
+        name="名称",
+        is_borrowed="是否被借用",
+        user_id="借用人学号",
+        create_time="登记时间",
+        update_time="上次变动时间"
+    )
+    column_descriptions = dict(
+        update_time="被借用的工具的借用时间或者被归还的工具的归还时间。"
+    )
+    column_filters = (
+        'is_borrowed', 'user_id'
+    )
+    column_editable_list = (
+        'name',
+    )
+    form_excluded_columns = (
+        'is_borrowed', 'user_id', 'create_time', 'update_time'
+    )
+    column_display_pk = True

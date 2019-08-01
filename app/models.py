@@ -7,7 +7,7 @@ class Activity(db.Model):
     __table__name = "activity"
     activity_id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.Integer)
-    # status = db.Column(db.Integer)
+    is_abled = db.Column(db.Integer)
     name = db.Column(db.VARCHAR(255))
     rest_number = db.Column(db.Integer)
     max_number = db.Column(db.Integer)

@@ -5,6 +5,7 @@
 # @File    : forms.py
 # @Software: PyCharm
 from flask_admin.form import BaseForm
+from flask_admin.form.fields import Select2Field
 from wtforms import IntegerField, StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length
 
@@ -12,7 +13,7 @@ from app.admin.compatibility import SelectMultipleField
 
 
 class ActivityForm(BaseForm):
-    type = SelectField(
+    type = Select2Field(
         label="类别",
         coerce=int,
         choices=[
@@ -21,7 +22,7 @@ class ActivityForm(BaseForm):
         ],
         validators=[DataRequired()]
     )
-    is_abled = SelectField(
+    is_abled = Select2Field(
         label="是否默认开放",
         coerce=int,
         choices=[
@@ -91,7 +92,7 @@ class ActivityDetailForm(BaseForm):
             (4, "星期四"),
             (5, "星期五"),
             (6, "星期六"),
-            (7, "星期七")
+            (7, "星期日")
         ],
         validators=[DataRequired()]
     )

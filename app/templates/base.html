@@ -10,6 +10,7 @@
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
         {% block styles %}
             <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css' ) }}">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet"/>
         {% endblock styles %}
     {% endblock head %}
 </head>
@@ -33,6 +34,8 @@
         </small>
     {% endblock %}
 </footer>
-{% block scripts %}{% endblock %}
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+{% endblock %}
 </body>
 </html>

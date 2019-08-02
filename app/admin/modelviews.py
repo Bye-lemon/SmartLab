@@ -46,10 +46,10 @@ class UserView(ModalView):
         is_allowed="审核通过的注册用户拥有实验室的学生权限。"
     )
     column_exclude_list = (
-        'pwd_hash', 'avatar_hash', 'create_time', 'update_time', 'is_deleted', 'verification_code'
+        'pwd_hash', 'avatar_hash', 'create_time', 'update_time'
     )
     column_export_exclude_list = (
-        'pwd_hash', 'avatar_hash', 'create_time', 'update_time', 'is_deleted', 'verification_code'
+        'pwd_hash', 'avatar_hash', 'create_time', 'update_time'
     )
 
 
@@ -67,24 +67,23 @@ class AuditView(ModalView):
         email="邮箱",
         is_allowed="是否接受",
         role="身份",
-        coin="积分",
-        is_deleted="是否删除"
+        coin="积分"
     )
     column_descriptions = dict(
         is_allowed="审核通过的注册用户拥有实验室的学生权限。",
         is_deleted="被标记的注册用户将被系统忽视处理。"
     )
     column_exclude_list = (
-        'pwd_hash', 'avatar_hash', 'email', 'create_time', 'update_time', 'verification_code', 'email', 'coin'
+        'pwd_hash', 'avatar_hash', 'email', 'create_time', 'update_time', 'email', 'coin'
     )
     column_export_exclude_list = (
-        'pwd_hash', 'avatar_hash', 'create_time', 'update_time', 'verification_code'
+        'pwd_hash', 'avatar_hash', 'create_time', 'update_time'
     )
     column_filters = (
-        'is_allowed', 'is_deleted', 'role'
+        'is_allowed', 'role'
     )
     column_editable_list = (
-        'role', 'is_allowed', 'is_deleted'
+        'role', 'is_allowed'
     )
     column_formatters = dict(
         is_allowed=lambda _, __, x, ___: "是" if x.is_allowed == 1 else "否",
@@ -159,11 +158,11 @@ class UserActivityView(ModalView):
     column_labels = dict(
         user_id="学生学号",
         activity_id="课程或活动号",
-        is_completed="是否完成",
+        is_complete="是否完成",
         score="成绩信息"
     )
     column_exclude_list = (
-        'is_completed', 'score'
+        'is_complete', 'score'
     )
     column_filters = (
         'activity_id',
@@ -181,7 +180,7 @@ class GradeView(ModalView):
     column_labels = dict(
         user_id="学生学号",
         activity_id="课程或活动号",
-        is_completed="是否完成",
+        is_complete="是否完成",
         score="成绩信息"
     )
     column_editable_list = (
@@ -203,7 +202,7 @@ class ActivityView(ModalView):
     column_labels = dict(
         activity_id="编号",
         type="类别",
-        is_abled="是否开放",
+        status="是否开放",
         name="名称",
         rest_number="剩余可选人数",
         max_number="总容量",
@@ -213,13 +212,13 @@ class ActivityView(ModalView):
     )
     column_formatters = dict(
         type=lambda _, __, x, ___: ["课程", "活动"][x.type - 1],
-        is_abled=lambda _, __, x, ___: "是" if x.is_abled == 1 else "否"
+        status=lambda _, __, x, ___: "是" if x.status == 1 else "否"
     )
     column_filters = (
-        'is_abled', 'teacher', 'type'
+        'status', 'teacher', 'type'
     )
     column_editable_list = (
-        'is_abled',
+        'status',
     )
     form = ActivityForm
     column_display_pk = True

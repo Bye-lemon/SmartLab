@@ -7,7 +7,7 @@ class Activity(db.Model):
     __table__name = "activity"
     activity_id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.Integer)
-    is_abled = db.Column(db.Integer)
+    status = db.Column(db.Integer)
     name = db.Column(db.VARCHAR(255))
     rest_number = db.Column(db.Integer)
     max_number = db.Column(db.Integer)
@@ -61,13 +61,11 @@ class User(db.Model):
     coin = db.Column(db.Integer)
     create_time = db.Column(db.DateTime)
     update_time = db.Column(db.DateTime)
-    is_deleted = db.Column(db.Integer)
-    verification_code = db.Column(db.VARCHAR(255))
 
 
 class UserActivity(db.Model):
     __tablename__ = "user_activity"
     user_id = db.Column(db.VARCHAR(255), primary_key=True)
     activity_id = db.Column(db.Integer, primary_key=True)
-    is_completed = db.Column(db.Integer)
+    is_complete = db.Column(db.Integer)
     score = db.Column(db.Integer)

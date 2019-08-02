@@ -22,7 +22,7 @@ class ActivityForm(BaseForm):
         ],
         validators=[DataRequired()]
     )
-    is_abled = Select2Field(
+    status = Select2Field(
         label="是否默认开放",
         coerce=int,
         choices=[

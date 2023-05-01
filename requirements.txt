@@ -1,7 +1,7 @@
 beautifulsoup4==4.8.0
 Bootstrap-Flask==1.0.10
 feedparser==5.2.1
-Flask==1.1.1
+Flask==2.3.2
 Flask-Admin==1.5.3
 Flask-BabelEx==0.9.3
 Flask-Login==0.4.1

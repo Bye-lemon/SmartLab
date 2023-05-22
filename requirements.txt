@@ -10,7 +10,7 @@ Flask-WTF==0.14.2
 Markdown==3.1.1
 PyMySQL==0.9.3
 python-dotenv==0.10.3
-requests==2.22.0
+requests==2.31.0
 requests-html==0.10.0
 sentry-sdk[flask]==0.10.2
 WTForms==2.2.1
